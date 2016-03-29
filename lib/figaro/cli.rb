@@ -38,5 +38,26 @@ module Figaro
       require "figaro/cli/heroku_set"
       HerokuSet.run(options)
     end
+
+    # figaro docker:env_file
+
+    desc "docker:env_file", "Create a Docker friendly env_file"
+
+    method_option "environment",
+      aliases: ["-e"],
+      desc: "Specify an application environment"
+    method_option "path",
+      aliases: ["-p"],
+      default: "config/application.yml",
+      desc: "Specify a configuration file path"
+    method_option "output",
+      aliases: ["-o"],
+      default: ".env",
+      desc: "Output file path"
+
+    define_method "docker:env_file" do
+      require "figaro/cli/docker_env_file"
+      DockerEnvFile.run(options)
+    end
   end
 end
